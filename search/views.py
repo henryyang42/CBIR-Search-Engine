@@ -13,7 +13,9 @@ class SearchForm(forms.Form):
         label='Select a file',
     )
     search_by = forms.ChoiceField((('sift', 'SIFT'), ('color', 'Color')))
-    search_limit = forms.ChoiceField((('10', '10'), ('20', '20'), ('50', '50')))
+    search_limit = forms.ChoiceField(
+        (('10', '10'), ('20', '20'), ('50', '50')))
+    distance_model = forms.ChoiceField((('euclidean', 'euclidean'), ('hamming', 'hamming'), ('cosine', 'cosine')))  # noqa
 
 
 def index(request):
@@ -26,11 +28,12 @@ def index(request):
             newdoc.save()
             query = str(newdoc.docfile)
             limit = form.cleaned_data['search_limit']
-            method = form.cleaned_data['search_by']
-            if method=='sift':
-                results = subprocess.Popen('python sift_feature/search.py -v sift_feature/vocabulary.npy -i sift_feature/index.csv -q media/%s -l %s' % (query, limit), shell=True, stdout=subprocess.PIPE).stdout.read()  # noqa
+            search_method = form.cleaned_data['search_by']
+            distance_model = form.cleaned_data['distance_model']
+            if search_method == 'sift':
+                results = subprocess.Popen('python sift_feature/search.py -v sift_feature/vocabulary.npy -i sift_feature/index.csv -q media/%s -l %s -d %s' % (query, limit, distance_model), shell=True, stdout=subprocess.PIPE).stdout.read()  # noqa
             else:
-                results = subprocess.Popen('python color_feature/search.py -i color_feature/index.csv -q media/%s -l %s' % (query, limit), shell=True, stdout=subprocess.PIPE).stdout.read()  # noqa
+                results = subprocess.Popen('python color_feature/search.py -i color_feature/index.csv -q media/%s -l %s -d %s' % (query, limit, distance_model), shell=True, stdout=subprocess.PIPE).stdout.read()  # noqa
             print results
             context['results'] = results.split('\n')[:-1]
             context['query'] = query

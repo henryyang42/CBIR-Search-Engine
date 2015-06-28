@@ -14,6 +14,8 @@ ap.add_argument("-i", "--index", default='index.csv',
                 help="Path to where the computed index will be stored")
 ap.add_argument("-l", "--limit", default=10,
                 help="Query result limit")
+ap.add_argument("-d", "--dist", default='euclidean',
+                help="Distance model")
 ap.add_argument("-q", "--query", required=True,
                 help="Path to the query image")
 args = vars(ap.parse_args())
@@ -27,7 +29,7 @@ features = cd.describe(query)
 
 # perform the search
 searcher = Searcher(args["index"])
-results = searcher.search(features, int(args["limit"]))
+results = searcher.search(features, int(args["limit"]), args["dist"])
 
 # loop over the results
 for (score, resultID) in results:

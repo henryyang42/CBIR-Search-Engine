@@ -22,8 +22,9 @@
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>{{ form.non_field_errors }}</p>
-    <p>{{ form.search_by }}</p>
-    <p>{{ form.search_limit }}</p>
+    <p>Search Feature: {{ form.search_by }}</p>
+    <p>Search Result Limit: {{ form.search_limit }}</p>
+    <p>Distance Model: {{ form.distance_model }}</p>
     <p>{{ form.docfile }}</p>
     <p><font color="red">{{ form.docfile.errors }}</font></p>
     <p><input type="submit" value="Upload"></p>
