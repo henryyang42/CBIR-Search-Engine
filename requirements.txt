@@ -1,0 +1,4 @@
+Django==1.8.2
+scipy==0.15.1
+progressbar==2.3
+numpy==1.9.2

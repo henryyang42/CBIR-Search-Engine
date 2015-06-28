@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>CBIR Search Engine</title>
+  <style type="text/css">
+    .query {
+        width: 300px;
+        height: 300px;
+        border:5px solid green;
+    }
+    .result {
+        width: 200px;
+        height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Upload form. Note enctype attribute! -->
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{ form.search_by }}</p>
+    <p>{{ form.search_limit }}</p>
+    <p>{{ form.docfile }}</p>
+    <p>
+      <input type="submit" value="Upload" />
+    </p>
+  </form>
+  {% if query %}
+    <img class="query" src="{{ MEDIA_URL }}{{ query }}"></img>
+  {% endif %}
+  {% for result in results %}
+    <img class="result" src="{{ MEDIA_URL }}{{ result }}"></img>
+  {% endfor %}
+</body>
+
+</html>
