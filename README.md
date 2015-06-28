@@ -1,6 +1,9 @@
 # CBIR Search Engine
 Python content base image reterival search engine
 
+# Requirements
+ - opencv 3.0.0
+ - python dependencies in requirements.txt
 # Run as script
 ## SIFT feature
 Search by SIFT feature using bag-of-words model
