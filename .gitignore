@@ -1,8 +1,6 @@
 # generated files
 sqlite3*
-dataset
 *.csv
-media
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
