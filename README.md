@@ -3,7 +3,7 @@ Python content base image reterival search engine with small dataset for quick d
 
 # Requirements
  - opencv 3.0.0
- - python dependencies in requirements.txt
+ - python dependencies in [requirements.txt](requirements.txt)
 
 # Run as script
 ## SIFT feature
@@ -25,3 +25,4 @@ python color_feature/search.py --index color_feature/index.csv --query dataset/s
 python manage.py syncdb
 python manage.py runserver
 ```
+You should able to access it from ``127.0.0.1:8000``
