@@ -1,5 +1,5 @@
 # CBIR Search Engine
-Python content base image reterival search engine
+Python content base image reterival search engine with small dataset for quick demo
 
 # Requirements
  - opencv 3.0.0
