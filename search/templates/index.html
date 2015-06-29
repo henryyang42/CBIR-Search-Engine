@@ -23,11 +23,10 @@
     {% csrf_token %}
     <p>{{ form.non_field_errors }}</p>
     <p>Search Feature: {{ form.search_by }}</p>
-    <p>Search Result Limit: {{ form.search_limit }}</p>
+    <p>Search Limit: {{ form.search_limit }}</p>
     <p>Distance Model: {{ form.distance_model }}</p>
-    <p>{{ form.docfile }}</p>
-    <p><font color="red">{{ form.docfile.errors }}</font></p>
-    <p><input type="submit" value="Upload"></p>
+    <p>Select an Image: {{ form.docfile }}</p>
+    <p><input type="submit" value="Submit"></p>
   </form>
   {% if query %}
     <img class="query" src="{{ MEDIA_URL }}{{ query }}"></img>

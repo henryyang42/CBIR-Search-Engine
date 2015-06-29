@@ -9,12 +9,10 @@ import subprocess
 
 
 class SearchForm(forms.Form):
-    docfile = forms.FileField(
-        label='Select a file',
-    )
+    docfile = forms.FileField(required=False)
     search_by = forms.ChoiceField((('sift', 'SIFT'), ('color', 'Color')))
     search_limit = forms.ChoiceField(
-        (('10', '10'), ('20', '20'), ('50', '50')))
+        (('5', '5'), ('10', '10'), ('20', '20'), ('50', '50')))
     distance_model = forms.ChoiceField((('euclidean', 'euclidean'), ('hamming', 'hamming'), ('cosine', 'cosine')))  # noqa
 
 
@@ -24,9 +22,12 @@ def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
-            query = str(newdoc.docfile)
+            try:
+                newdoc = Document(docfile=request.FILES['docfile'])
+                newdoc.save()
+                query = str(newdoc.docfile)
+            except:
+                query = str(Document.objects.all().order_by('-id')[0].docfile)
             limit = form.cleaned_data['search_limit']
             search_method = form.cleaned_data['search_by']
             distance_model = form.cleaned_data['distance_model']
