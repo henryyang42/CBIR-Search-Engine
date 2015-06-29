@@ -1,6 +1,7 @@
 # generated files
 sqlite3*
 *.csv
+query
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
