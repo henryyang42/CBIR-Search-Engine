@@ -2,18 +2,15 @@
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
 from models import Document
 import subprocess
 
 
 class SearchForm(forms.Form):
     docfile = forms.FileField(required=False)
-    search_by = forms.ChoiceField((('sift', 'SIFT'), ('color', 'Color')))
-    search_limit = forms.ChoiceField(
-        (('5', '5'), ('10', '10'), ('20', '20'), ('50', '50')))
-    distance_model = forms.ChoiceField((('euclidean', 'euclidean'), ('hamming', 'hamming'), ('cosine', 'cosine')))  # noqa
+    search_by = forms.CharField(initial='sift')
+    search_limit = forms.CharField(initial='10')
+    distance_model = forms.CharField(initial='euclidean')
 
 
 def index(request):
